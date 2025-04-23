@@ -7,12 +7,13 @@ def hashCal(path, algo='md5'):
     hasher = hashlib.new(algo)
 
     with open(path, 'rb') as f:
-        while chunk := f.read(4096):  # đọc từng khối nhỏ để tránh dùng quá nhiều RAM
+        while chunk := f.read(4096):
             hasher.update(chunk)
 
     return hasher.hexdigest()
 
-if __name__=="__main__":
+
+if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('--pathin', default="fakepathin.jpg", type=str, help='Duong dan anh input')
     parser.add_argument('--pathout', default="fakepathout.jpg", type=str, help='Duong dan anh output')
@@ -28,4 +29,3 @@ if __name__=="__main__":
     cv2.imwrite(filename=args.pathout, img=resized_image)
     hash_value = hashCal(args.pathout)
     print(f"Anh moi luu tai: {args.pathout}, MD5 checksum: {hash_value}")
-    # print(f"")

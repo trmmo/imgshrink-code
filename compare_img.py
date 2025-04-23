@@ -13,6 +13,7 @@ def hashCal(path, algo='md5'):
 
     return hasher.hexdigest()
 
+
 def export_diff(img1_path, img2_path, output_path):
     img1 = cv2.imread(img1_path)
     img2 = cv2.imread(img2_path)
@@ -64,28 +65,22 @@ def count_diff(img1_path, img2_path):
         for j in range(img1.shape[1]):
             b1, g1, r1 = img1[i, j]
             b2, g2, r2 = img2[i, j]
-            if not(b1 == b2 and g1 == g2 and r1 == r2):
+            if not (b1 == b2 and g1 == g2 and r1 == r2):
                 count += 1
     print(f"Hai anh khac nhau {count} pixel.")
 
 
-if __name__=="__main__":
+if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('--path1', default="fakepath1.jpg", type=str, help='Duong dan anh 1')
     parser.add_argument('--path2', default="fakepath2.jpg", type=str, help='Duong dan anh 2')
     parser.add_argument('--pathout', default="fakepathout.jpg", type=str, help='Duong dan anh 2')
     parser.add_argument('--action', default="nothing", type=str, help='Duong dan anh 2')
     args = parser.parse_args()
-    # image = cv2.imread(args.pathin)
-    # width = image.shape[1]
-    # height = image.shape[0]
-    # resized_image = cv2.resize(cv2.resize(image, (args.width, args.height)), (width, height))
-    #
-    # cv2.imwrite(filename=args.pathout, img=resized_image)
-    # selection = args.action
-    if (args.action == "export"):
+
+    if args.action == "export":
         export_diff(args.path1, args.path2, args.pathout)
-    elif (args.action == "count"):
+    elif args.action == "count":
         count_diff(args.path1, args.path2)
     else:
         print("Success is not final, failure is not fatal: it is the courage to continue that counts. :D")
